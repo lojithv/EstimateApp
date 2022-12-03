@@ -6,20 +6,20 @@ import {
 
 function AboutScreen() {
   return (
-    <View style={{ padding: 50, height: 200, flex: 1, flexDirection: "column", justifyContent: 'space-around' }}>
+    <View style={{ padding: 50 }}>
       <View>
+      <Text
+          style={{
+            color: 'black',
+          }}>
+          ID : 101377804
+        </Text>
         <Text
           style={{
             color: 'black',
             marginTop: 10,
           }}>
-          Name : Mohsen Yahya
-        </Text>
-        <Text
-          style={{
-            color: 'black',
-          }}>
-          ID : 101241827
+          Name : Gunjan Sharma
         </Text>
       </View>
     </View>

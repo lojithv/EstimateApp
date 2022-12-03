@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   TextInput,
   Text,
   Button,
+  Switch,
   View,
 } from 'react-native';
 
 function MainScreen({ navigation }) {
-  const [roomSize, setRoomSize] = useState("0");
-  const [flooringPricePerUnit, setFlooringPricePerUnit] = useState("0");
-  const [installationCostPerUnit, setInstallationCostPerUnit] = useState("0");
+  const [size, setSize] = useState("0");
+  const [flooring_price, setFlooringPrice] = useState("0");
+  const [installation_cost, setInstallationCost] = useState("0");
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  const [totalInstallationCost, setTotalInstallationCost] = useState(0);
-  const [totalFlooringCost, setTotalFlooringCost] = useState(0);
+  const [installation, setInstallation] = useState(0);
+  const [flooring, setFlooring] = useState(0);
   const [tax, setTax] = useState(0);
 
-  const calculateEstimate = () => {
-    if (parseFloat(roomSize)) {
+  const getEstimate = () => {
+    if (parseFloat(size)) {
       const updatedInstallationCost =
-        parseFloat(roomSize) * parseFloat(installationCostPerUnit);
-      setTotalInstallationCost(updatedInstallationCost);
+        parseFloat(size) * parseFloat(installation_cost);
+      setInstallation(updatedInstallationCost);
 
-      const updatedFlooringCost = parseFloat(roomSize) * parseFloat(flooringPricePerUnit);
-      setTotalFlooringCost(updatedFlooringCost);
+      const updatedFlooringCost = parseFloat(size) * parseFloat(flooring_price);
+      setFlooring(updatedFlooringCost);
 
-      const updatedTax = (updatedFlooringCost + updatedInstallationCost) * 0.13;
-      setTax(updatedTax);
+      const taxAmount = (updatedFlooringCost + updatedInstallationCost) * 0.13;
+      setTax(taxAmount);
     }
   };
 
@@ -41,13 +44,33 @@ function MainScreen({ navigation }) {
       }}>
       <View>
         <View>
-          <Text
-            style={{
-              //   height: 40,
-              color: 'black',
-            }}>
-            Size of a room
-          </Text>
+          <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+            <Text
+              style={{
+                //   height: 40,
+                color: 'black',
+              }}>
+              Size of a room
+            </Text>
+            <View style={{display:'flex',flexDirection:'row'}}>
+            <Text
+              style={{
+                //   height: 40,
+                color: 'black',
+              }}>
+              {isEnabled? 'sq ft': 'sq mt'}
+            </Text>
+            <Switch
+              trackColor={{ false: "gray", true: "blue" }}
+              thumbColor={"white"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
+            />
+            </View>
+     
+          </View>
+
           <TextInput
             style={{
               height: 40,
@@ -57,8 +80,8 @@ function MainScreen({ navigation }) {
               marginTop: 10,
             }}
             placeholder="0"
-            onChangeText={newSize => setRoomSize(newSize)}
-            defaultValue={roomSize}
+            onChangeText={newSize => setSize(newSize)}
+            defaultValue={size}
           />
         </View>
         <View>
@@ -78,8 +101,8 @@ function MainScreen({ navigation }) {
               marginTop: 10,
             }}
             placeholder="0"
-            onChangeText={newCost => setFlooringPricePerUnit(newCost)}
-            defaultValue={flooringPricePerUnit}
+            onChangeText={newCost => setFlooringPrice(newCost)}
+            defaultValue={flooring_price}
           />
         </View>
         <View>
@@ -98,9 +121,9 @@ function MainScreen({ navigation }) {
               color: "black",
               marginTop: 10,
             }}
-            placeholder="Type here to translate!"
-            onChangeText={newCost => setInstallationCostPerUnit(newCost)}
-            defaultValue={installationCostPerUnit}
+            placeholder="0"
+            onChangeText={newCost => setInstallationCost(newCost)}
+            defaultValue={installation_cost}
           />
         </View>
 
@@ -110,22 +133,22 @@ function MainScreen({ navigation }) {
               //   height: 40,
               color: 'black',
             }}>
-            Installation cost before tax:{totalInstallationCost}
+            Installation cost:{installation}
           </Text>
           <Text
             style={{
               //   height: 40,
               color: 'black',
             }}>
-            Flooring cost before tax:{totalFlooringCost}
+            Flooring cost:{flooring}
           </Text>
           <Text
             style={{
               //   height: 40,
               color: 'black',
             }}>
-            Total cost (installation + flooring) before tax:
-            {(parseFloat(totalInstallationCost) + parseFloat(totalFlooringCost)).toString()}
+            Total cost (installation + flooring):
+            {(parseFloat(installation) + parseFloat(flooring)).toString()}
           </Text>
           <Text
             style={{
@@ -136,13 +159,13 @@ function MainScreen({ navigation }) {
           </Text>
         </View>
         <View style={{ marginTop: 10, marginBottom: 10 }}>
-        <Button
-          onPress={() => {
-            calculateEstimate();
-          }}
-          title={'Calculate'}
-        />
-      </View>
+          <Button
+            onPress={() => {
+              getEstimate();
+            }}
+            title={'GET ESTIMATE'}
+          />
+        </View>
       </View>
 
 
