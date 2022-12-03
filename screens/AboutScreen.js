@@ -14,24 +14,25 @@ import {
 function AboutScreen({ navigation }) {
   const [isHungry, setIsHungry] = useState(true);
   return (
-    <View>
-      <Text
-        style={{
-          //   height: 40,
-          color: 'black',
-        }}
-      >
-        About screen
-      </Text>
-      <TextInput
-        style={{
-          height: 40,
-          color: 'black',
-          borderColor: "gray",
-          borderWidth: 1,
-        }}
-        defaultValue="Name me!"
-      />
+    <View style={{ padding: 50, height: 200, flex: 1, flexDirection: "column", justifyContent: 'space-around' }}>
+      <View>
+        <Text
+          style={{
+            //   height: 40,
+            color: 'black',
+          }}>
+          Student ID
+        </Text>
+        <Text
+          style={{
+            //   height: 40,
+            color: 'black',
+            marginTop: 10,
+          }}>
+          Full Name
+        </Text>
+      </View>
+
       <Button
         onPress={() => {
           navigation.navigate("Main");
