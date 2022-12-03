@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   ScrollView,
   TextInput,
+  Switch,
   Text,
   Button,
   View,
@@ -15,6 +16,9 @@ function MainScreen({ navigation }) {
   const [totalInstallationCost, setTotalInstallationCost] = useState(0);
   const [totalFlooringCost, setTotalFlooringCost] = useState(0);
   const [tax, setTax] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const calculateEstimate = () => {
     if (parseFloat(roomSize)) {
@@ -41,25 +45,44 @@ function MainScreen({ navigation }) {
       }}>
       <View>
         <View>
-          <Text
-            style={{
-              //   height: 40,
-              color: 'black',
-            }}>
-            Size of a room
-          </Text>
-          <TextInput
-            style={{
-              height: 40,
-              borderColor: 'gray',
-              borderWidth: 1,
-              color: "black",
-              marginTop: 10,
-            }}
-            placeholder="0"
-            onChangeText={newSize => setRoomSize(newSize)}
-            defaultValue={roomSize}
-          />
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text
+              style={{
+                //   height: 40,
+                color: 'black',
+              }}>
+              Size of a room
+            </Text>
+            <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={'white'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
+            />
+          </View>
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <TextInput
+              style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+                color: "black",
+                marginTop: 10,
+                width: '70%'
+              }}
+              placeholder="0"
+              onChangeText={newSize => setRoomSize(newSize)}
+              defaultValue={roomSize}
+            />
+            <Text
+              style={{
+                color: 'black',
+              }}>
+              {isEnabled ? 'sq ft' : 'sq mt'}
+            </Text>
+          </View>
+
         </View>
         <View>
           <Text
@@ -98,7 +121,7 @@ function MainScreen({ navigation }) {
               color: "black",
               marginTop: 10,
             }}
-            placeholder="Type here to translate!"
+            placeholder="0"
             onChangeText={newCost => setInstallationCostPerUnit(newCost)}
             defaultValue={installationCostPerUnit}
           />
@@ -136,13 +159,13 @@ function MainScreen({ navigation }) {
           </Text>
         </View>
         <View style={{ marginTop: 10, marginBottom: 10 }}>
-        <Button
-          onPress={() => {
-            calculateEstimate();
-          }}
-          title={'Calculate'}
-        />
-      </View>
+          <Button
+            onPress={() => {
+              calculateEstimate();
+            }}
+            title={'Calculate'}
+          />
+        </View>
       </View>
 
 
