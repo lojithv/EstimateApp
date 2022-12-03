@@ -4,6 +4,7 @@ import {
   TextInput,
   Text,
   Button,
+  Switch,
   View,
 } from 'react-native';
 
@@ -15,6 +16,9 @@ function MainScreen({ navigation }) {
   const [installationCost, setInstallationCost] = useState(0);
   const [flooringCost, setFlooringCost] = useState(0);
   const [tax, setTax] = useState(0);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   useEffect(() => {
     handleCalculation();
@@ -64,6 +68,23 @@ function MainScreen({ navigation }) {
           defaultValue={size}
         />
       </View>
+      <View style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+            <Text
+          style={{
+            //   height: 40,
+            color: 'black',
+          }}>
+          {isEnabled? 'square feet':'square meters'}
+        </Text>
+      </View>
+
       <View>
         <Text
           style={{
