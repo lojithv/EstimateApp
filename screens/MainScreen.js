@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-  SafeAreaView,
   ScrollView,
-  StatusBar,
-  StyleSheet,
   TextInput,
   Text,
   Button,
-  useColorScheme,
   View,
 } from 'react-native';
-import Section from '../components/Section';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 function MainScreen({ navigation }) {
   const [size, setSize] = useState("0");
@@ -144,16 +138,6 @@ function MainScreen({ navigation }) {
           Tax:{tax}
         </Text>
       </View>
-
-      {/* <View style={{ marginTop: 10, marginBottom: 10 }}>
-        <Button
-
-          onPress={() => {
-            navigation.navigate('About');
-          }}
-          title={"Calculate"}
-        />
-      </View> */}
 
       <View style={{ marginTop: 10, marginBottom: 10 }}>
         <Button

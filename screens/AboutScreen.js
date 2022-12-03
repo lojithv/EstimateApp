@@ -1,18 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  TextInput,
   Text,
   Button,
-  useColorScheme,
   View,
 } from "react-native";
 
 function AboutScreen({ navigation }) {
-  const [isHungry, setIsHungry] = useState(true);
   return (
     <View style={{ padding: 50, height: 200, flex: 1, flexDirection: "column", justifyContent: 'space-around' }}>
       <View>
@@ -21,7 +14,7 @@ function AboutScreen({ navigation }) {
             //   height: 40,
             color: 'black',
           }}>
-          Student ID
+          Student ID : 101243840
         </Text>
         <Text
           style={{
@@ -29,7 +22,7 @@ function AboutScreen({ navigation }) {
             color: 'black',
             marginTop: 10,
           }}>
-          Full Name
+          Full Name : Wissam Hamed
         </Text>
       </View>
 
@@ -42,14 +35,5 @@ function AboutScreen({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  baseText: {
-    fontWeight: "bold",
-  },
-  innerText: {
-    color: "black",
-  },
-});
 
 export default AboutScreen;
