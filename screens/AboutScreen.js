@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -9,42 +9,46 @@ import {
   Button,
   useColorScheme,
   View,
-} from 'react-native';
+} from "react-native";
 
 function AboutScreen({ navigation }) {
   const [isHungry, setIsHungry] = useState(true);
   return (
     <View>
-      <Text       style={{
-        //   height: 40,
-          color: "black",
-        }}>About screen</Text>
+      <Text
+        style={{
+          //   height: 40,
+          color: 'black',
+        }}
+      >
+        About screen
+      </Text>
       <TextInput
         style={{
           height: 40,
-          color: "black",
-          borderColor: 'gray',
+          color: 'black',
+          borderColor: "gray",
           borderWidth: 1,
         }}
         defaultValue="Name me!"
       />
       <Button
         onPress={() => {
-          setIsHungry(false);
+          navigation.navigate("Main");
         }}
-        title={'Go to Main'}
+        title={"Go to Main"}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    baseText: {
-      fontWeight: 'bold'
-    },
-    innerText: {
-      color: 'black'
-    }
-  });
+  baseText: {
+    fontWeight: "bold",
+  },
+  innerText: {
+    color: "black",
+  },
+});
 
 export default AboutScreen;
